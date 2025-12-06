@@ -595,13 +595,12 @@ document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
 
   track.addEventListener("mousedown", e => {
     isDown = true;
-    track.classList.add("active");
     startX = e.pageX - track.offsetLeft;
     scrollLeft = track.scrollLeft;
   });
 
-  track.addEventListener("mouseleave", () => { isDown = false; track.classList.remove("active"); });
-  track.addEventListener("mouseup", () => { isDown = false; track.classList.remove("active"); });
+  track.addEventListener("mouseleave", () => { isDown = false; });
+  track.addEventListener("mouseup", () => { isDown = false; });
 
   track.addEventListener("mousemove", e => {
     if (!isDown) return;
@@ -624,8 +623,38 @@ document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
     touchStartX = touch.clientX;
   });
 
+  /* ============================================================
+     🔥 AUTO-SCROLL (gambar bergerak otomatis dari kanan ke kiri)
+     ============================================================ */
+
+  let autoScrollSpeed = 1.2; // kecepatan auto scroll (bisa diubah)
+  let autoScrollInterval;
+
+  function startAutoScroll() {
+    autoScrollInterval = setInterval(() => {
+      track.scrollLeft += autoScrollSpeed;
+
+      // kalau sudah mentok kanan → balik ke kiri
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) {
+        track.scrollLeft = 0;
+      }
+
+    }, 15); // semakin kecil, semakin smooth
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+  }
+
+  startAutoScroll();
+
+  // pause saat mouse hover biar user bisa lihat foto
+  wrapper.addEventListener("mouseenter", stopAutoScroll);
+  wrapper.addEventListener("mouseleave", startAutoScroll);
+
 });
 </script>
+
 
 </body>
 </html>
