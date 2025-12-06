@@ -248,7 +248,10 @@ html { scroll-behavior: smooth; }
   height: 100%;
   background: linear-gradient(90deg, #fff, #bbb);
   border-radius: 20px;
+  width: 0%; /* mulai dari 0 */
+  transition: width 1.4s ease-out;
 }
+
 
 /* ======================= */
 /*      EXPERIENCE         */
@@ -483,29 +486,33 @@ html { scroll-behavior: smooth; }
       <div class="stat-header">
         <span>Photography Skill</span><span>95%</span>
       </div>
-      <div class="stat-bar"><div class="stat-fill" style="width:95%;"></div></div>
-    </div>
+      <div class="stat-bar">
+        <div class="stat-fill" data-width="95%"></div>
+      </div>
 
     <div class="stat-box">
       <div class="stat-header">
         <span>Videography</span><span>80%</span>
       </div>
-      <div class="stat-bar"><div class="stat-fill" style="width:80%;"></div></div>
-    </div>
+      <div class="stat-bar">
+        <div class="stat-fill" data-width="80%"></div>
+      </div>
 
     <div class="stat-box">
       <div class="stat-header">
         <span>Editing (Lightroom/Premiere)</span><span>88%</span>
       </div>
-      <div class="stat-bar"><div class="stat-fill" style="width:88%;"></div></div>
-    </div>
+      <div class="stat-bar">
+        <div class="stat-fill" data-width="88%"></div>
+      </div>
 
     <div class="stat-box">
       <div class="stat-header">
         <span>Graphic Design</span><span>70%</span>
       </div>
-      <div class="stat-bar"><div class="stat-fill" style="width:70%;"></div></div>
-    </div>
+      <div class="stat-bar">
+        <div class="stat-fill" data-width="70%"></div>
+      </div>
   </div>
 </section>
 
@@ -567,19 +574,15 @@ html { scroll-behavior: smooth; }
 
 <footer><p>&copy; 2025 Azam Lufelan. XI DKV 1.</p></footer>
 
-<!-- =============================================================== -->
-<!-- 🔥 INTERACTIVE JS (Drag, Swipe, Button Scroll, Auto Smooth)     -->
-<!-- =============================================================== -->
 <script>
 
-// buat semua slider bisa geser
 document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
   
   const track = wrapper.querySelector(".slider-track");
   const btnLeft = wrapper.querySelector(".slider-btn.left");
   const btnRight = wrapper.querySelector(".slider-btn.right");
 
-  // tombol klik kiri kanan
+  // tombol manual
   btnLeft.addEventListener("click", () => {
     track.scrollBy({ left: -300, behavior: "smooth" });
   });
@@ -587,8 +590,77 @@ document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
   btnRight.addEventListener("click", () => {
     track.scrollBy({ left: 300, behavior: "smooth" });
   });
+  
+   // =====================
+// ANIMASI MY STATS
+// =====================
+const statBars = document.querySelectorAll(".stat-fill");
+let statsPlayed = false;
 
-  // drag pakai mouse
+function animateStats() {
+  const statsSection = document.querySelector(".stats-section");
+  const rect = statsSection.getBoundingClientRect();
+
+  if (!statsPlayed && rect.top < window.innerHeight - 100) {
+    statsPlayed = true;
+
+    statBars.forEach(bar => {
+      const target = bar.getAttribute("data-width");
+      bar.style.width = target;
+    });
+  }
+}
+
+window.addEventListener("scroll", animateStats);
+animateStats();
+
+  // ===== AUTO SCROLL =====
+  let arah = 1; // 1 = kanan, -1 = kiri
+  let autoScrollActive = true;
+
+  function autoScroll() {
+    if (!autoScrollActive) return;
+
+    track.scrollBy({ left: 2 * arah, behavior: "smooth" });
+
+    // jika sudah ujung kanan → balik
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) {
+      arah = -1;
+    }
+
+    // jika sudah ujung kiri → balik
+    if (track.scrollLeft <= 2) {
+      arah = 1;
+    }
+  }
+
+  const autoScrollInterval = setInterval(autoScroll, 20);
+
+  // ===== STOP SAAT HOVER / CLICK =====
+  track.addEventListener("mouseenter", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("mouseover", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("mousedown", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("click", () => {
+    autoScrollActive = false;
+  });
+
+  // ===== LANJUTKAN SAAT MOUSE KELUAR =====
+  track.addEventListener("mouseleave", () => {
+    autoScrollActive = true;
+  });
+
+  // ============================
+  // DRAG MOUSE
+  // ============================
   let isDown = false;
   let startX;
   let scrollLeft;
@@ -610,9 +682,13 @@ document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
     track.scrollLeft = scrollLeft - walk;
   });
 
-  // swipe untuk HP
+  // ============================
+  // TOUCH / SWIPE HP
+  // ============================
   let touchStartX = 0;
+
   track.addEventListener("touchstart", e => {
+    autoScrollActive = false;
     touchStartX = e.touches[0].clientX;
   });
 
@@ -623,38 +699,11 @@ document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
     touchStartX = touch.clientX;
   });
 
-  /* ============================================================
-     🔥 AUTO-SCROLL (gambar bergerak otomatis dari kanan ke kiri)
-     ============================================================ */
-
-  let autoScrollSpeed = 1.2; // kecepatan auto scroll (bisa diubah)
-  let autoScrollInterval;
-
-  function startAutoScroll() {
-    autoScrollInterval = setInterval(() => {
-      track.scrollLeft += autoScrollSpeed;
-
-      // kalau sudah mentok kanan → balik ke kiri
-      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) {
-        track.scrollLeft = 0;
-      }
-
-    }, 15); // semakin kecil, semakin smooth
-  }
-
-  function stopAutoScroll() {
-    clearInterval(autoScrollInterval);
-  }
-
-  startAutoScroll();
-
-  // pause saat mouse hover biar user bisa lihat foto
-  wrapper.addEventListener("mouseenter", stopAutoScroll);
-  wrapper.addEventListener("mouseleave", startAutoScroll);
+  track.addEventListener("touchend", () => {
+    autoScrollActive = true;
+  });
 
 });
 </script>
-
-
-</body>
+  </body>
 </html>
