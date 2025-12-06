@@ -126,6 +126,13 @@ p {
   user-select: none;
   object-fit: cover;
   background: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slider-track img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Tombol kiri kanan */
@@ -198,6 +205,182 @@ h3 { text-align: center; }
 .chatme { text-align: center; }
 html { scroll-behavior: smooth; }
 
+/* ======================= */
+/*        STAT SECTION     */
+/* ======================= */
+
+.stats-section {
+  padding: 60px 40px;
+  background: #0d0d0d;
+}
+
+.stats-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.stats-section h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.stat-box {
+  margin-bottom: 25px;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.stat-bar {
+  width: 100%;
+  height: 12px;
+  background: #333;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fff, #bbb);
+  border-radius: 20px;
+}
+
+/* ======================= */
+/*      EXPERIENCE         */
+/* ======================= */
+
+.experience-section {
+  padding: 60px 40px;
+  background: #111;
+}
+
+.experience-section h2 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: auto;
+  border-left: 3px solid #444;
+  padding-left: 25px;
+}
+
+.timeline-item {
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: -34px;
+  top: 3px;
+  border: 3px solid #111;
+}
+
+.timeline-item h3 {
+  font-size: 26px;
+}
+
+.timeline-item p {
+  font-size: 18px;
+  color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .stats-section, .experience-section {
+    padding: 40px 20px;
+  }
+  .timeline-item h3 { font-size: 22px; }
+  .timeline-item p { font-size: 15px; }
+}
+
+/* ============================= */
+/*        GET IN TOUCH          */
+/* ============================= */
+
+.getintouch-section {
+  padding: 60px 40px;
+  background: #0a0a0a;
+}
+
+.getintouch-container {
+  max-width: 750px;
+  margin: auto;
+  text-align: center;
+}
+
+.getintouch-section h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.getintouch-box {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.getintouch-box input,
+.getintouch-box textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #0d0d0d;
+  color: white;
+  font-size: 17px;
+}
+
+.getintouch-box input:focus,
+.getintouch-box textarea:focus {
+  outline: 2px solid #555;
+}
+
+.getintouch-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.getintouch-btn:hover {
+  background: #ccc;
+}
+
+.social-links {
+  margin-top: 25px;
+}
+
+.social-links a {
+  margin: 0 10px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.social-links a:hover {
+  color: #bbb;
+}
+
   </style>
 </head>
 <body>
@@ -208,10 +391,9 @@ html { scroll-behavior: smooth; }
     <h1>EllanoPhotos📸</h1>
     <nav>
       <a href="#home">Home</a>
-      <a href="#about">About</a>
       <a href="#gallery">Gallery</a>
-      <a href="#">Lorem</a>
-      <a href="#">Lorem</a>
+      <a href="#stats">Stats</a>
+      <a href="#experience">Experience</a>
       <a href="#">Lorem</a>
     </nav>
     <a href="contact.html" class="btn nav-link">Contact</a>
@@ -287,6 +469,99 @@ html { scroll-behavior: smooth; }
     <img src="img/p10.jpg">
     <img src="img/p11.jpg">
     <img src="img/p12.jpg">
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 🔥 STATISTIK SAYA            -->
+<!-- ============================= -->
+<section class="stats-section" id="stats">
+  <div class="stats-container">
+    <h2>My Stats</h2>
+
+    <div class="stat-box">
+      <div class="stat-header">
+        <span>Photography Skill</span><span>95%</span>
+      </div>
+      <div class="stat-bar"><div class="stat-fill" style="width:95%;"></div></div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-header">
+        <span>Videography</span><span>80%</span>
+      </div>
+      <div class="stat-bar"><div class="stat-fill" style="width:80%;"></div></div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-header">
+        <span>Editing (Lightroom/Premiere)</span><span>88%</span>
+      </div>
+      <div class="stat-bar"><div class="stat-fill" style="width:88%;"></div></div>
+    </div>
+
+    <div class="stat-box">
+      <div class="stat-header">
+        <span>Graphic Design</span><span>70%</span>
+      </div>
+      <div class="stat-bar"><div class="stat-fill" style="width:70%;"></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================= -->
+<!-- 🔥 PENGALAMAN SAYA           -->
+<!-- ============================= -->
+<section class="experience-section" id="experience">
+  <h2>My Experience</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <h3>📸 Freelance Photographer (2022 - Now)</h3>
+      <p>Berpengalaman dalam photoshoot model, event, dan street photography.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>🎬 Freelance Videographer (2023 - Now)</h3>
+      <p>Membuat cinematic video, short film, dan video Instagram Reels.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>🖼️ Editor Lightroom & Photoshop (2021 - Now)</h3>
+      <p>Editing warna, retouching wajah, dan komposit dasar.</p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>🏆 1st Place – School Photography Competition 2024</h3>
+      <p>Memenangkan lomba foto tingkat sekolah dengan tema “Human & Emotion”.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 🔥 GET IN TOUCH SECTION       -->
+<!-- ============================= -->
+<section class="getintouch-section" id="getintouch">
+  <div class="getintouch-container">
+    <h2>Get In Touch</h2>
+
+    <div class="getintouch-box">
+      <form action="#" method="POST">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message..." required></textarea>
+        <button class="getintouch-btn">Send Message</button>
+      </form>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com/lufelano/">📷</a>
+        <a href="mailto:lufelanobiz@gmail.com">📧</a>
+        <a href="https://wa.me/628xxxxxx">💬</a>
+      </div>
+    </div>
   </div>
 </section>
 

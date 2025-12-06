@@ -198,6 +198,80 @@ h3 { text-align: center; }
 .chatme { text-align: center; }
 html { scroll-behavior: smooth; }
 
+/* ============================= */
+/*        GET IN TOUCH          */
+/* ============================= */
+
+.getintouch-section {
+  padding: 60px 40px;
+  background: #0a0a0a;
+}
+
+.getintouch-container {
+  max-width: 750px;
+  margin: auto;
+  text-align: center;
+}
+
+.getintouch-section h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.getintouch-box {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.getintouch-box input,
+.getintouch-box textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #0d0d0d;
+  color: white;
+  font-size: 17px;
+}
+
+.getintouch-box input:focus,
+.getintouch-box textarea:focus {
+  outline: 2px solid #555;
+}
+
+.getintouch-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.getintouch-btn:hover {
+  background: #ccc;
+}
+
+.social-links {
+  margin-top: 25px;
+}
+
+.social-links a {
+  margin: 0 10px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.social-links a:hover {
+  color: #bbb;
+}
+
   </style>
 </head>
 <body>
@@ -238,8 +312,32 @@ html { scroll-behavior: smooth; }
     <h3>Chat With Me</h3>
     <img src="myprofil.jpg" class="profile-pic" />
     <div class="chatme">
-      <a href="https://wa.me/083103579261" class="btn">Whatsapp</a>
+      <a href="https://wa.me/+6283103579261" class="btn">Whatsapp</a>
       <a href="https://www.instagram.com/lufelano/" class="btn-outline">My Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- 🔥 GET IN TOUCH SECTION       -->
+<!-- ============================= -->
+<section class="getintouch-section" id="getintouch">
+  <div class="getintouch-container">
+    <h2>Get In Touch</h2>
+
+    <div class="getintouch-box">
+      <form action="#" method="POST">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message..." required></textarea>
+        <button class="getintouch-btn">Send Message</button>
+      </form>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com/lufelano/">📷</a>
+        <a href="mailto:lufelanobiz@gmail.com">📧</a>
+        <a href="https://wa.me/628xxxxxx">💬</a>
+      </div>
     </div>
   </div>
 </section>
