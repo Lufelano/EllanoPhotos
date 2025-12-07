@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EllanoPhotos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+* { 
+  margin: 0; padding: 0; box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
+  line-height: 1.6;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 45px;
+  text-align: center;
+}
+
+p {
+  font-size: 23px;
+}
+  
+/*Navbar*/
+
+.navbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  background-color: #000;
+  animation: slideDown 0.7s ease-out forwards;
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+@keyframes slideDown { to { transform: translateY(0); opacity: 1; } }
+
+.navbar nav a {
+  margin: 0 15px;
+  color: #aaa;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.navbar nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+
+.navbar nav a:hover { 
+  color: #fff; 
+}
+
+.navbar nav a:hover::after { 
+  width: 100%; 
+}
+
+.button { 
+  background: #fff; color: #000;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/*Home*/
+
+.home {
+  background-image: linear-gradient(rgba(48, 38, 5, 0.5), rgba(0, 0, 0, 0.5)), url(profilutamabg.JPG);
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.home-content { 
+  max-width: 50%; 
+}
+
+.home-image img {
+  border-radius: 50%;
+  max-width: 400px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+
+.imageslider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.slider-track {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-track img {
+  height: 400px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  user-select: none;
+  object-fit: cover;
+  background: #333;
+  box-shadow: 0 4px 12px rgb(24, 24, 24);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slider-track img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgb(46, 46, 46);
+}
+
+/*Skill*/
+
+.skills { padding: 60px 40px; }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.skills-box {
+  background-color: #1a1a1a;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skills-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgb(36, 36, 36);
+}
+
+.skills-box i {
+  color: cornsilk;
+  font-size: 75px;
+  padding: 10px;
+}
+
+/*Gallery*/
+
+.buttongallery {
+  text-align: center;
+  background: #fff; color: #000;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-right: 270px;
+  margin-left: 270px;
+}
+
+/*My Experience*/
+
+.experience-section {
+  padding: 60px 40px;
+  background: #111;
+}
+
+.experience-section h2 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.timeline {
+  max-width: 800px;
+  margin: auto;
+  border-left: 3px solid #444;
+  padding-left: 25px;
+}
+
+.timeline-item {
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: -34px;
+  top: 3px;
+  border: 3px solid #111;
+}
+
+.timeline-item h3 {
+  font-size: 26px;
+}
+
+.timeline-item p {
+  font-size: 18px;
+  color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .stats-section, .experience-section {
+    padding: 40px 20px;
+  }
+  .timeline-item h3 { font-size: 22px; }
+  .timeline-item p { font-size: 15px; }
+}
+
+/* ============================= */
+/*        GET IN TOUCH          */
+/* ============================= */
+
+.getintouch-section {
+  padding: 60px 40px;
+  background: #0a0a0a;
+}
+
+.getintouch-container {
+  max-width: 750px;
+  margin: auto;
+  text-align: center;
+}
+
+.getintouch-section h2 {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.getintouch-box {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.getintouch-box input,
+.getintouch-box textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #0d0d0d;
+  color: white;
+  font-size: 17px;
+}
+
+.getintouch-box input:focus,
+.getintouch-box textarea:focus {
+  outline: 2px solid #555;
+}
+
+.getintouch-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.getintouch-btn:hover {
+  background: #ccc;
+}
+
+.social-links {
+  margin-top: 25px;
+}
+
+.social-links a {
+  margin: 0 10px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.social-links a:hover {
+  color: #bbb;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #555;
+  font-size: 14px;
+}
+
+  </style>
+</head>
+<body>
+
+<!--Navbar-->
+
+<header>
+  <div class="navbar">
+    <h1>EllanoPhotos📸</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#">Lorem</a>
+    </nav>
+    <a href="contact.html" class="button nav-link">Contact</a>
+  </div>
+</header>
+
+<br><br><br>
+
+<!--Home-->
+
+<section class="home" id="home">
+  <div class="home-content">
+    <h2>Gw Lufelan Me Bilek</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit nec faucibus mattis pulvinar.</p><br>
+    <div class="profilutama-buttons">
+      <a href="#gallery" class="button">Browse My Creation</a>
+      <a href="index.html" class="button">Back To Landing Page</a>
+    </div>
+  </div>
+  <div class="home-image">
+    <img src="mykecefoto.jpg" alt="Photographer" />
+  </div>
+</section>
+
+<!--My Photo-->
+
+<section class="imageslider">
+  <div class="slider-track" id="myphoto">
+    <img src="img/001.jpg">
+    <img src="img/002.jpg">
+    <img src="img/003.jpg">
+    <img src="img/004.jpg">
+    <img src="img/005.jpg">
+    <img src="img/006.jpg">
+    <img src="img/007.jpg">
+    <img src="img/008.jpg">
+  </div>
+</section>
+
+<!--Skills-->
+
+<section class="skills" id="skills">
+  <h3>My Skills</h3>
+  <div class="skills-grid">
+    <div class="skills-box">
+      <i class="fa-solid fa-camera"></i>
+      <h4>Photography</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <div class="skills-box"><i class="fa-solid fa-video"></i>
+      <h4>Videography</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <div class="skills-box">
+      <i class="fa-solid fa-film"></i>
+      <h4>Filmmaking</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <div class="skills-box">
+      <i class="fa-solid fa-sliders"></i>
+      <h4>Editing</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <div class="skills-box">
+      <i class="fa-solid fa-pen"></i>
+      <h4>Graphic Design</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+    <div class="skills-box">
+      <i class="fa-solid fa-code"></i>
+      <h4>Web Design</h4>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </div>
+  </div>
+</section>
+
+<!--Gallery-->
+
+<section class="imageslider" id="gallery">
+  <div class="slider-track">
+    <img src="img/p01.jpg">
+    <img src="img/p02.jpg">
+    <img src="img/p03.jpg">
+    <img src="img/p04.jpg">
+    <img src="img/p05.jpg">
+    <img src="img/p06.jpg">
+    <img src="img/p07.jpg">
+    <img src="img/p08.jpg">
+    <img src="img/p09.jpg">
+    <img src="img/p10.jpg">
+    <img src="img/p11.jpg">
+    <img src="img/p12.jpg">
+  </div>
+  <div class="buttongallery">
+    <a href="gallery.html" class="buttongallery">See More My Gallery</a>
+  </div>
+</section>
+
+<!--My Experience-->
+
+<section class="experience-section" id="experience">
+  <h2>My Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3>📸 Freelance Photographer (2022 - Now)</h3>
+      <p>Berpengalaman dalam photoshoot model, event, dan street photography.</p>
+    </div>
+    <div class="timeline-item">
+      <h3>🎬 Freelance Videographer (2023 - Now)</h3>
+      <p>Membuat cinematic video, short film, dan video Instagram Reels.</p>
+    </div>
+    <div class="timeline-item">
+      <h3>🖼️ Editor Lightroom & Photoshop (2021 - Now)</h3>
+      <p>Editing warna, retouching wajah, dan komposit dasar.</p>
+    </div>
+    <div class="timeline-item">
+      <h3>🏆 1st Place – School Photography Competition 2024</h3>
+      <p>Memenangkan lomba foto tingkat sekolah dengan tema “Human & Emotion”.</p>
+    </div>
+  </div>
+</section>
+
+<!--Get In Touch-->
+
+<section class="getintouch-section" id="getintouch">
+  <div class="getintouch-container">
+    <h2>Get In Touch</h2>
+
+    <div class="getintouch-box">
+      <form action="#" method="POST">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message..." required></textarea>
+        <button class="getintouch-btn">Send Message</button>
+      </form>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com/lufelano/">📷</a>
+        <a href="mailto:lufelanobiz@gmail.com">📧</a>
+        <a href="https://wa.me/628xxxxxx">💬</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Azam Lufelan. XI DKV 1.</p></footer>
+
+<script>
+
+document.querySelectorAll(".imageslider").forEach(wrapper => {
+  
+  const track = wrapper.querySelector(".slider-track");
+
+  // ===== AUTO SCROLL =====
+  let arah = 1; // 1 = kanan, -1 = kiri
+  let autoScrollActive = true;
+
+  function autoScroll() {
+    if (!autoScrollActive) return;
+    track.scrollBy({ left: 2 * arah, behavior: "smooth" });
+    // jika sudah ujung kanan → balik
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) {
+      arah = -1;
+    }
+    // jika sudah ujung kiri → balik
+    if (track.scrollLeft <= 2) {
+      arah = 1;
+    }
+  }
+  const autoScrollInterval = setInterval(autoScroll, 20);
+
+  // ===== STOP SAAT HOVER / CLICK =====
+  track.addEventListener("mouseenter", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("mouseover", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("mousedown", () => {
+    autoScrollActive = false;
+  });
+
+  track.addEventListener("click", () => {
+    autoScrollActive = false;
+  });
+
+  // ===== LANJUTKAN SAAT MOUSE KELUAR =====
+  track.addEventListener("mouseleave", () => {
+    autoScrollActive = true;
+  });
+
+  // ============================
+  // DRAG MOUSE
+  // ============================
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  track.addEventListener("mousedown", e => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  track.addEventListener("mouseleave", () => { isDown = false; });
+  track.addEventListener("mouseup", () => { isDown = false; });
+
+  track.addEventListener("mousemove", e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX);
+    track.scrollLeft = scrollLeft - walk;
+  });
+
+  // ============================
+  // TOUCH / SWIPE HP
+  // ============================
+  let touchStartX = 0;
+
+  track.addEventListener("touchstart", e => {
+    autoScrollActive = false;
+    touchStartX = e.touches[0].clientX;
+  });
+
+  track.addEventListener("touchmove", e => {
+    const touch = e.touches[0];
+    let move = touch.clientX - touchStartX;
+    track.scrollLeft -= move;
+    touchStartX = touch.clientX;
+  });
+
+  track.addEventListener("touchend", () => {
+    autoScrollActive = true;
+  });
+
+});
+</script>
+  </body>
+</html>
