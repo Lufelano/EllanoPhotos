@@ -12,7 +12,8 @@
 }
 body {
   font-family: Arial, sans-serif;
-  background-color: #111;
+  background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
+  background-color: #000; /* fallback */
   color: #fff;
   line-height: 1.6;
   opacity: 1;
@@ -43,7 +44,7 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 10px 25px;
-  background-color: #000;
+  background: linear-gradient(135deg, #1a1a1a, #000000 80%);
   animation: slideDown 0.7s ease-out forwards;
   transform: translateY(-100%);
   opacity: 0;
@@ -108,7 +109,16 @@ p {
 
 .getintouch-section {
   padding: 60px 40px;
-  background: #0a0a0a;
+  filter: brightness(0.3);
+  background: linear-gradient(-45deg, #1a1a1a, #111, #222, #000);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .getintouch-container {
@@ -170,9 +180,19 @@ p {
   background: #ccc;
 }
 
-.navbar { padding:10px 15px; flex-wrap:wrap; }
+    .navbar { padding:10px 15px; flex-wrap:wrap; }
     .navbar h1 { font-size:20px; margin-bottom:5px; }
     .navbar nav a { margin:0 8px; font-size:12px; }
+
+.social-links {
+  margin-top: 25px;
+  font-size: 30px;
+}
+
+.social-links i {
+  color: #fff;
+}
+
 /*Footer*/
 
 footer {
@@ -192,7 +212,7 @@ footer {
 <header>
   <div class="navbar">
     <h1>EllanoPhotos📸</h1>
-    <a href="index.html" class="button nav-link">Back To Home</a>
+    <a href="indexafter.html" class="button nav-link">Back To Home</a>
   </div>
 </header>
 
