@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>EllanoPhotos</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+  margin: 0; padding: 0; box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #111;
@@ -15,18 +18,20 @@ body {
   transition: opacity 0.5s ease-in-out;
 }
 
-.fade-out { opacity: 0; }
-header { width: 100%; }
-a { text-decoration: none; color: inherit; }
-
-h1, h2, h3 {
+h1 {
   font-size: 45px;
+}
+
+h2 {
+  font-size: 50px;
 }
 
 p {
   font-size: 23px;
 }
-  
+
+/*Navbar*/
+
 .navbar {
   display: flex;
   position: fixed;
@@ -45,117 +50,21 @@ p {
 
 @keyframes slideDown { to { transform: translateY(0); opacity: 1; } }
 
-.navbar nav a {
-  margin: 0 15px;
-  color: #aaa;
-  position: relative;
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-
-.navbar nav a::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #fff;
-  transition: width 0.3s ease;
-}
-
-.navbar nav a:hover { color: #fff; }
-.navbar nav a:hover::after { width: 100%; }
-
-.btn, .btn-outline {
+.button { 
+  background: #fff; color: #000;
   padding: 10px 20px;
   border-radius: 20px;
   font-weight: bold;
   margin-right: 10px;
-}
-.btn { background: #fff; color: #000; }
-.btn-outline {
-  border: 2px solid #fff;
-  color: #fff;
-  background: transparent;
+  text-decoration: none;
 }
 
-/* ============================= */
-/*         PROFIL UTAMA          */
-/* ============================= */
+/*Services*/
 
-.profilutama {
-  background-image: linear-gradient(rgba(48, 38, 5, 0.5), rgba(0, 0, 0, 0.5)), url(profilutamabg.JPG);
-  background-size: cover;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 40px;
+.services { 
+  padding: 60px 40px; 
 }
 
-.profilutama-content { max-width: 50%; }
-.profilutama-image img {
-  border-radius: 10px;
-  max-width: 400px;
-  height: auto;
-}
-
-.slider-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding: 20px 0;
-}
-
-.slider-track {
-  display: flex;
-  gap: 20px;
-  padding: 10px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.slider-track::-webkit-scrollbar {
-  display: none;
-}
-
-.slider-track img {
-  height: 400px;
-  border-radius: 10px;
-  flex-shrink: 0;
-  user-select: none;
-  object-fit: cover;
-  background: #333;
-}
-
-/* Tombol kiri kanan */
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.7);
-  border: none;
-  color: #fff;
-  padding: 15px;
-  font-size: 22px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-}
-
-.slider-btn.left { left: 10px; }
-.slider-btn.right { right: 10px; }
-
-
-@media (max-width: 600px) {
-  .slider-btn {
-    display: none;
-  }
-}
-
-/* ========================================================= */
-
-.services { padding: 60px 40px; }
 .service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -169,7 +78,7 @@ p {
   border-radius: 10px;
 }
 
-.container1, .container2 {
+.container2 {
   max-width: 900px;
   margin: 40px auto;
   background: #1a1a1a;
@@ -186,21 +95,17 @@ p {
   margin: 20px auto;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #000;
-  color: #555;
-  font-size: 14px;
+.socialbutton { 
+  background: #fff; color: #000;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: large;
+  margin-right: 10px;
+  text-decoration: none;
 }
 
-h3 { text-align: center; }
-.chatme { text-align: center; }
-html { scroll-behavior: smooth; }
-
-/* ============================= */
-/*        GET IN TOUCH          */
-/* ============================= */
+/*Get In Touch*/
 
 .getintouch-section {
   padding: 60px 40px;
@@ -213,18 +118,23 @@ html { scroll-behavior: smooth; }
   text-align: center;
 }
 
-.getintouch-section h2 {
-  font-size: 40px;
-  margin-bottom: 30px;
-}
-
 .getintouch-box {
   background: #1a1a1a;
   padding: 30px;
   border-radius: 12px;
 }
 
-.getintouch-box input,
+.getintouch-box input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #0d0d0d;
+  color: white;
+  font-size: 17px;
+}
+
 .getintouch-box textarea {
   width: 100%;
   padding: 15px;
@@ -236,7 +146,10 @@ html { scroll-behavior: smooth; }
   font-size: 17px;
 }
 
-.getintouch-box input:focus,
+.getintouch-box input:focus {
+  outline: 2px solid #555;
+}
+
 .getintouch-box textarea:focus {
   outline: 2px solid #555;
 }
@@ -260,71 +173,55 @@ html { scroll-behavior: smooth; }
 
 .social-links {
   margin-top: 25px;
+  font-size: 30px;
 }
 
-.social-links a {
-  margin: 0 10px;
-  font-size: 22px;
+.social-links i {
   color: #fff;
 }
 
-.social-links a:hover {
-  color: #bbb;
+/*Footer*/
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #555;
+  font-size: 14px;
 }
 
   </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!--Navbar-->
 <header>
   <div class="navbar">
     <h1>EllanoPhotos📸</h1>
-    <a href="index.html" class="btn nav-link">Back To Home</a>
+    <a href="index.html" class="button nav-link">Back To Home</a>
   </div>
 </header>
 
-<br>
-<br>
-<br>
+<br><br><br>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div class="container1">
-    <h2>Selamat datang kawan kawan</h2>
-    <p>gatau yang penting ada isinya</p>
-  </div>
+<!--Contact Section-->
 
-  <div class="container2">
-    <h1>Biografi Singkat</h1>
-    <img src="mypasfoto.jpg" class="profile-pic" />
-
-    <div class="bio">
-      <p>Nama saya <strong>M. Azam Lufelan Budiyono</strong>.</p>
-      <p>hai.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
 <section class="about-section" id="contact">
   <div class="container2">
-    <h3>Chat With Me</h3>
+    <h1>Chat With Me</h1>
     <img src="myprofil.jpg" class="profile-pic" />
     <div class="chatme">
-      <a href="https://wa.me/+6283103579261" class="btn">Whatsapp</a>
-      <a href="https://www.instagram.com/lufelano/" class="btn-outline">My Instagram</a>
+      <a href="https://wa.me/+6283103579261" class="socialbutton"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/lufelano/" class="socialbutton"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </div>
 </section>
 
-<!-- ============================= -->
-<!-- 🔥 GET IN TOUCH SECTION       -->
-<!-- ============================= -->
+<!--Get In Touch Section-->
+
 <section class="getintouch-section" id="getintouch">
   <div class="getintouch-container">
     <h2>Get In Touch</h2>
-
     <div class="getintouch-box">
       <form action="#" method="POST">
         <input type="text" placeholder="Your Name" required>
@@ -332,77 +229,16 @@ html { scroll-behavior: smooth; }
         <textarea rows="5" placeholder="Your Message..." required></textarea>
         <button class="getintouch-btn">Send Message</button>
       </form>
-
       <div class="social-links">
-        <a href="https://www.instagram.com/lufelano/">📷</a>
-        <a href="mailto:lufelanobiz@gmail.com">📧</a>
-        <a href="https://wa.me/628xxxxxx">💬</a>
+        <a href="https://github.com/Lufelano"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.instagram.com/lufelano/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/+6283103579261"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 </section>
 
 <footer><p>&copy; 2025 Azam Lufelan. XI DKV 1.</p></footer>
-
-<!-- =============================================================== -->
-<!-- 🔥 INTERACTIVE JS (Drag, Swipe, Button Scroll, Auto Smooth)     -->
-<!-- =============================================================== -->
-<script>
-
-// buat semua slider bisa geser
-document.querySelectorAll(".slider-wrapper").forEach(wrapper => {
-  
-  const track = wrapper.querySelector(".slider-track");
-  const btnLeft = wrapper.querySelector(".slider-btn.left");
-  const btnRight = wrapper.querySelector(".slider-btn.right");
-
-  // tombol klik kiri kanan
-  btnLeft.addEventListener("click", () => {
-    track.scrollBy({ left: -300, behavior: "smooth" });
-  });
-
-  btnRight.addEventListener("click", () => {
-    track.scrollBy({ left: 300, behavior: "smooth" });
-  });
-
-  // drag pakai mouse
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  track.addEventListener("mousedown", e => {
-    isDown = true;
-    track.classList.add("active");
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-
-  track.addEventListener("mouseleave", () => { isDown = false; track.classList.remove("active"); });
-  track.addEventListener("mouseup", () => { isDown = false; track.classList.remove("active"); });
-
-  track.addEventListener("mousemove", e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - startX);
-    track.scrollLeft = scrollLeft - walk;
-  });
-
-  // swipe untuk HP
-  let touchStartX = 0;
-  track.addEventListener("touchstart", e => {
-    touchStartX = e.touches[0].clientX;
-  });
-
-  track.addEventListener("touchmove", e => {
-    const touch = e.touches[0];
-    let move = touch.clientX - touchStartX;
-    track.scrollLeft -= move;
-    touchStartX = touch.clientX;
-  });
-
-});
-</script>
 
 </body>
 </html>
