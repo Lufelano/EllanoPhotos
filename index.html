@@ -4,259 +4,151 @@
 <meta charset="UTF-8" />
 <title>Download Game - Monokrom + Navbar + Booting</title>
 <style>
+  * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
   body {
-    margin: 0;
     font-family: 'Arial Black', sans-serif;
-    background: #000;
-    color: #fff;
-    overflow-x: hidden;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+    line-height:1.5;
   }
 
- /*Booting*/
-
+  /* Booting Screen */
   #bootScreen {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: linear-gradient(135deg, #1a1a1a, #000000 80%);
-    display: flex;
-    background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
-    background-color: #000; /* fallback */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    position: fixed; top:0; left:0; width:100vw; height:100vh;
+    background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat #000;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    z-index:9999;
   }
 
   #bootText {
     font-family: "Courier New", monospace;
-    color: #cfcfcf;
-    font-size: 22px;
-    letter-spacing: 2px;
-    text-align: center;
+    color:#cfcfcf;
+    font-size:22px;
+    letter-spacing:2px;
+    text-align:center;
     white-space: pre-line;
   }
 
   .loader {
-    margin-top: 20px;
-    width: 180px;
-    height: 6px;
-    background: #333;
-    border-radius: 3px;
-    overflow: hidden;
+    margin-top:20px;
+    width:180px; height:6px;
+    background:#333;
+    border-radius:3px;
+    overflow:hidden;
   }
 
   .loader-bar {
-    width: 0%;
-    height: 100%;
-    background: #fff;
+    width:0%; height:100%;
+    background:#fff;
     animation: loading 1.5s linear forwards;
   }
 
-  @keyframes loading {
-    0% { width: 0%; }
-    100% { width: 100%; }
-  }
+  @keyframes loading { 0% { width:0%; } 100% { width:100%; } }
 
   .fadeOut {
     animation: fadeOutAnim 0.5s ease forwards;
   }
 
-  @keyframes fadeOutAnim {
-    from { opacity: 1; }
-    to { opacity: 0; visibility: hidden; }
-  }
+  @keyframes fadeOutAnim { from{opacity:1;} to{opacity:0; visibility:hidden;} }
 
- /*Navbar*/
-
+  /* Navbar */
   header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
+    position:fixed; top:0; left:0; right:0; z-index:1000;
   }
-
   .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 25px;
-    background-color: #000;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 25px; background-color:#000;
+    transform:translateY(-100%); opacity:0;
     animation: slideDown 0.7s ease-out forwards;
-    transform: translateY(-100%);
-    opacity: 0;
-    animation-delay: 4.5s;
-    animation-fill-mode: forwards;
+    animation-delay:3.5s; animation-fill-mode:forwards;
   }
+  @keyframes slideDown { to{transform:translateY(0); opacity:1;} }
 
-  @keyframes slideDown {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .navbar h1 {
-    color: #fff;
-    margin: 0;
-    font-weight: 900;
-    font-size: 24px;
-  }
-
+  .navbar h1 { color:#fff; font-weight:900; font-size:24px; margin:0; }
   .navbar nav a {
-    margin: 0 15px;
-    color: #aaa;
-    position: relative;
-    display: inline-block;
-    transition: color 0.3s ease;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
+    margin:0 15px; color:#aaa; text-decoration:none; font-weight:600; font-size:14px;
+    position:relative; transition:color 0.3s ease;
   }
-
   .navbar nav a::after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #fff;
-    transition: width 0.3s ease;
+    content:''; position:absolute; width:0%; height:2px; bottom:-4px; left:0; background:#fff;
+    transition:width 0.3s ease;
   }
-
-  .navbar nav a:hover {
-    color: #fff;
-  }
-
-  .navbar nav a:hover::after {
-    width: 100%;
-  }
+  .navbar nav a:hover { color:#fff; }
+  .navbar nav a:hover::after { width:100%; }
 
   .button {
-    background: #fff;
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    margin-right: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
-    display: inline-block;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background:#fff; color:#000; padding:10px 20px;
+    border-radius:20px; font-weight:bold; margin-right:10px;
+    text-decoration:none; font-size:14px; cursor:pointer;
+    display:inline-block; transition:0.3s;
   }
+  .button:hover { background:#ccc; color:#000; }
 
-  .button:hover {
-    background: #ccc;
-    color: #000;
-  }
-
-  /*LandingPage*/
-
+  /* Hero Section */
   .hero {
-    height: 100vh;
-    width: 100%;
+    height:100vh; width:100%; display:flex; align-items:center; position:relative;
+    padding:80px 60px 0 60px; justify-content:flex-start;
     background: url(landingpage.jpg) center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    padding-left: 60px;
-    padding-right: 60px;
-    position: relative;
-    justify-content: flex-start;
-    /* offset navbar height so content won't hide under navbar */
-    padding-top: 80px;
-    box-sizing: border-box;
-    opacity: 0;
-    animation: fadeInContent 1s ease forwards;
-    animation-delay: 5.5s;
+    opacity:0; animation: fadeInContent 1s ease forwards; animation-delay:4.5s;
+    box-sizing:border-box;
   }
-
-  @keyframes fadeInContent {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  @keyframes fadeInContent { from{opacity:0;} to{opacity:1;} }
 
   .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 0;
+    content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.55); z-index:0;
   }
 
   .hero-content {
-    position: relative;
-    max-width: 500px;
-    z-index: 1;
+    position:relative; max-width:500px; z-index:1;
   }
-
   .hero h1 {
-    font-size: 70px;
-    line-height: 0.95;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 900;
+    font-size:70px; font-weight:900; line-height:0.95; text-transform:uppercase; margin:0;
   }
-
   .hero button {
-    margin-top: 30px;
-    padding: 18px 40px;
-    background: transparent;
-    border: 3px solid #fff;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 4px;
+    margin-top:30px; padding:18px 40px;
+    background:transparent; border:3px solid #fff;
+    color:#fff; font-size:18px; font-weight:bold; cursor:pointer;
+    transition:0.3s ease; text-transform:uppercase; letter-spacing:1px; border-radius:4px;
   }
+  .hero button:hover { background:#fff; color:#000; }
 
-  .hero button:hover {
-    background: #fff;
-    color: #000;
-  }
-
-  @media (max-width: 600px) {
-    .hero h1 {
-      font-size: 40px;
-    }
-    .hero-content {
-      max-width: 90%;
-      padding-right: 20px;
-    }
-    .navbar nav a {
-      margin: 0 8px;
-      font-size: 12px;
-    }
+  /* Responsive */
+  @media(max-width:600px) {
+    .hero h1 { font-size:40px; }
+    .hero-content { max-width:90%; padding-right:20px; }
+    .navbar nav a { margin:0 8px; font-size:12px; }
+    .button { padding:8px 15px; font-size:12px; margin-right:5px; }
   }
 </style>
 </head>
 <body>
 
-<!--Booting-->
-
+<!-- Booting Screen -->
 <div id="bootScreen">
-  <div id="bootText">مَنْ جَدَّ وَجَدَ<br>"Barang siapa yang bersungguh-sungguh, ia akan mencapai tujuannya".</div>
+  <div id="bootText">
+مَنْ جَدَّ وَجَدَ
+"Barang siapa yang bersungguh-sungguh, ia akan mencapai tujuannya".
+  </div>
   <div class="loader"><div class="loader-bar"></div></div>
 </div>
 
+<!-- Navbar -->
 <header>
   <div class="navbar">
     <h1>EllanoPhotos📸</h1>
     <nav>
       <a href="indexafter.html">Home</a>
-      <a href="indexafter.html">Gallery</a>
       <a href="indexafter.html">Skills</a>
+      <a href="indexafter.html">Gallery</a>
       <a href="indexafter.html">Experience</a>
-      <a href="indexafter.html">Lorem</a>
     </nav>
     <a href="contact.html" class="button nav-link">Contact</a>
   </div>
 </header>
 
+<!-- Hero / Landing Page -->
 <div class="hero">
   <div class="hero-content">
     <h1>Selamat Datang</h1>
@@ -265,18 +157,11 @@
 </div>
 
 <script>
-  // Setelah loader selesai (sekitar 3.5 detik), fade out bootScreen
+  // Booting fade out
   const bootScreen = document.getElementById('bootScreen');
-
-  setTimeout(() => {
-    bootScreen.classList.add('fadeOut');
-  }, 3500);
-
-  // Setelah fade out animasi selesai (1s), sembunyikan div bootScreen
-  bootScreen.addEventListener('animationend', () => {
-    if (bootScreen.classList.contains('fadeOut')) {
-      bootScreen.style.display = 'none';
-    }
+  setTimeout(()=>{ bootScreen.classList.add('fadeOut'); }, 3500);
+  bootScreen.addEventListener('animationend', ()=>{
+    if(bootScreen.classList.contains('fadeOut')) bootScreen.style.display='none';
   });
 </script>
 
